@@ -14,9 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('expense_categories', function (Blueprint $table) {
-            $table->uuid('uuid');
-            $table->unsignedBigInteger('expense_id');
-            $table->foreign('expense_id')->references('id')->on('expenses');
+            $table->id('id');
             $table->string('name');
             $table->string('image_path');
             $table->timestamps();

@@ -24,7 +24,9 @@ class StoreExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'expense_amount' => 'required|integer',
+            'note' => 'string|max:255',
+            'transaction_account' => 'string|max:100',
         ];
     }
 }

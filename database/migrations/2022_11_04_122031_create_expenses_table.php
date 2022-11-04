@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('expense_category_id');
+            $table->foreign('expense_category_id')->references('id')->on('expense_categories')->onUpdate('cascade')->onDelete('cascade');;
             $table->integer('expense_amount')->unsigned()->nullable(false)->default(12);
             $table->string('note')->nullable(true)->default(12);
             $table->string('transaction_account')->nullable(false)->default(12);
