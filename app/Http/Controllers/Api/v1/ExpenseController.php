@@ -78,9 +78,24 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExpenseRequest $request, Expense $expense)
+    public function update(UpdateExpenseRequest $request,  $id)
     {
-        //
+        try {
+            $expense = Expense::findOrFail($id);
+            $expense->update(
+                [
+                    'expense_amount' => $request->expense_amount,
+                    'note' => $request->note,
+                    'transaction_account' => $request->transaction_account,
+                    'expense_category_id' => $request->expense_category_id,
+                ]
+            );
+
+            return Response($expense, 200);
+        } catch (\Throwable $th) {
+            Log::debug($th);
+            return Response('something went wrong!', 204);
+        }
     }
 
     /**

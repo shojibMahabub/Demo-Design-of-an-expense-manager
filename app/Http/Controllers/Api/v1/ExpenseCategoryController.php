@@ -74,9 +74,23 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateExpenseCategoryRequest $request, $id)
     {
-        //
+        try {
+            $expense_category = ExpenseCategory::findOrFail($id);
+            $expense_category->update(
+                [
+                    'name' => $request->name,
+                    'image_path' => $request->image_path,
+                    'expense_id' => $request->expense_id,
+                ]
+            );
+
+            return Response($expense_category, 200);
+        } catch (\Throwable $th) {
+            Log::debug($th);
+            return Response('something went wrong!', 204);
+        }
     }
 
     /**

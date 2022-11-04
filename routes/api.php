@@ -19,10 +19,12 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api\v1'],
     Route::get('expense', [ExpenseController::class, 'index']);
     Route::post('expense', [ExpenseController::class, 'store']);
     Route::get('expense/{id}', [ExpenseController::class, 'show']);
+    Route::put('expense/{id}', [ExpenseController::class, 'update']);
     Route::delete('expense/{id}', [ExpenseController::class, 'destroy']);
 
     Route::get('expense-category', [ExpenseCategoryController::class, 'index']);
     Route::post('expense-category', [ExpenseCategoryController::class, 'store']);
     Route::get('expense-category/{id}', [ExpenseCategoryController::class, 'show']);
+    Route::put('expense-category/{id}', [ExpenseCategoryController::class, 'update']);
     Route::delete('expense-category/{id}', [ExpenseCategoryController::class, 'destroy']);
 });

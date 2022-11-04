@@ -16,4 +16,7 @@ class Expense extends Model
     {
         return $this->belongsTo(ExpenseCategory::class);
     }
+    public function total_expense() {
+        return Expense::sum('expense_amount');
+    }
 }

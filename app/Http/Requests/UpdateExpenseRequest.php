@@ -13,7 +13,7 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'expense_amount' => 'sometimes|integer|min:0',
+            'note' => 'string|max:255',
+            'transaction_account' => 'string|max:100',
+            'expense_category_id' => 'sometimes|integer'
         ];
     }
 }
