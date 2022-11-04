@@ -18,7 +18,7 @@ class ExpenseCategorySeeder extends Seeder
         foreach (range(1, 10) as $i) {
             DB::table('expense_categories')->insert([
                 'id' => $i,
-                'expense_id' => null,
+                // 'expense_id' => null,
                 'name' => 'A demo category ' . $i,
                 'image_path' => "assets/expense_categories/".$i,
                 'created_at' => date("Y-m-d H:i:s"),
