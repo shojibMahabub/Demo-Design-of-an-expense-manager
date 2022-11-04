@@ -13,7 +13,7 @@ class StoreExpenseCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreExpenseCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:50',
+            'image_path' => 'string|max:255',
+            'expense_id' => 'integer',
         ];
     }
 }

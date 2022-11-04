@@ -11,6 +11,7 @@ class ExpenseCategory extends Model
 
     public $timestamps = true;
 
+    protected $fillable = ['name', 'image_path', 'expense_id'];
 
     public function expenses()
     {

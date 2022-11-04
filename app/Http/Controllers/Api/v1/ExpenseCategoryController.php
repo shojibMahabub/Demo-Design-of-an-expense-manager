@@ -8,6 +8,7 @@ use App\Models\ExpenseCategory;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
+use Illuminate\Support\Facades\Log;
 
 class ExpenseCategoryController extends Controller
 {
@@ -19,7 +20,7 @@ class ExpenseCategoryController extends Controller
     public function index()
     {
         try {
-            $list_of_expense = ExpenseCategory::all();
+            $list_of_expense = ExpenseCategory::with('expenses')->get();
             return Response($list_of_expense, 200);
         } catch (\Throwable $th) {
             return Response('something went wrong!', 204);
@@ -35,9 +36,17 @@ class ExpenseCategoryController extends Controller
     public function store(StoreExpenseCategoryRequest $request)
     {
         try {
-            $list_of_expense = ExpenseCategory::all();
-            return Response($list_of_expense, 200);
+            $expense_category = ExpenseCategory::create(
+                [
+                    'name' => $request->name,
+                    'image_path' => $request->image_path,
+                    'expense_id' => $request->expense_id,
+                ]
+            );
+            $expense_category->save();
+            return Response($expense_category, 200);
         } catch (\Throwable $th) {
+            Log::debug($th);
             return Response('something went wrong!', 204);
         }
     }

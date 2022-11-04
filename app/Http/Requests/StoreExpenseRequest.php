@@ -27,7 +27,7 @@ class StoreExpenseRequest extends FormRequest
             'expense_amount' => 'required|integer|min:0',
             'note' => 'string|max:255',
             'transaction_account' => 'string|max:100',
-            'expense_category_id' => 'integer|nullable'
+            'expense_category_id' => 'required|integer'
         ];
     }
 }

@@ -20,7 +20,7 @@ class ExpenseCategorySeeder extends Seeder
                 'id' => $i,
                 'expense_id' => null,
                 'name' => 'A demo category ' . $i,
-                'image_path' => "assets/expense_categories",
+                'image_path' => "assets/expense_categories/".$i,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
             ]);
