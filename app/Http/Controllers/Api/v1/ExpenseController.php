@@ -70,6 +70,18 @@ class ExpenseController extends Controller
         }
     }
 
+    public function getTotal(Request $id)
+    {
+        try {
+            Log::debug('hi');
+            $expense = new Expense();
+            $total_expense = $expense->total_expense();
+            return Response($total_expense, 200);
+        } catch (\Throwable $th) {
+            Log::debug($th);
+            return Response('something went wrong!', 204);
+        }
+    }
 
     /**
      * Update the specified resource in storage.

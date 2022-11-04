@@ -21,6 +21,7 @@ Route::group(['prefix' => 'v1', 'middleware' => 'api', 'namespace' => 'Api\v1'],
     Route::get('expense/{id}', [ExpenseController::class, 'show']);
     Route::put('expense/{id}', [ExpenseController::class, 'update']);
     Route::delete('expense/{id}', [ExpenseController::class, 'destroy']);
+    Route::get('expenses', [ExpenseController::class, 'getTotal']);
 
     Route::get('expense-category', [ExpenseCategoryController::class, 'index']);
     Route::post('expense-category', [ExpenseCategoryController::class, 'store']);
