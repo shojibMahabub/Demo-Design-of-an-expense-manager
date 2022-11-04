@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Requests\StoreExpenseCategoryRequest;
 use App\Http\Requests\UpdateExpenseCategoryRequest;
 use App\Models\ExpenseCategory;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
 
 class ExpenseCategoryController extends Controller
@@ -16,17 +18,12 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        try {
+            $list_of_expense = ExpenseCategory::all();
+            return Response($list_of_expense, 200);
+        } catch (\Throwable $th) {
+            return Response('something went wrong!', 204);
+        }
     }
 
     /**
@@ -37,7 +34,12 @@ class ExpenseCategoryController extends Controller
      */
     public function store(StoreExpenseCategoryRequest $request)
     {
-        //
+        try {
+            $list_of_expense = ExpenseCategory::all();
+            return Response($list_of_expense, 200);
+        } catch (\Throwable $th) {
+            return Response('something went wrong!', 204);
+        }
     }
 
     /**
@@ -46,20 +48,14 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(ExpenseCategory $expenseCategory)
+    public function show(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ExpenseCategory  $expenseCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ExpenseCategory $expenseCategory)
-    {
-        //
+        try {
+            $expense = ExpenseCategory::findOrFail($id);
+            return Response($expense, 200);
+        } catch (\Throwable $th) {
+            return Response('something went wrong!', 204);
+        }
     }
 
     /**
@@ -80,8 +76,14 @@ class ExpenseCategoryController extends Controller
      * @param  \App\Models\ExpenseCategory  $expenseCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy(Request $request, $id)
     {
-        //
+        try {
+            $expense = ExpenseCategory::where('id',$id)->delete();
+            return Response('Resource deleted!', 200);
+        } catch (\Throwable $th) {
+            Log::debug($th);
+            return Response('something went wrong!', 204);
+        }
     }
 }
